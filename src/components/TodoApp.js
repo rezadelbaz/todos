@@ -19,7 +19,29 @@ const TodoApp = () => {
       text: input,
       isCompleted: false,
     };
-    setTodos([...todos, newTodo]);
+    const checkUsername = (obj) => obj.text === input;
+    if (!todos.some(checkUsername)) {
+      setTodos([...todos, newTodo]);
+      toast.success("Todo Added", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.error("Todo is exist", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   const completeTodo = (id) => {
     const index = todos.findIndex((todo) => todo.id === id);
@@ -78,6 +100,15 @@ const TodoApp = () => {
     const updatedTodos = [...todos];
     updatedTodos[index] = selectedTodo;
     setTodos(updatedTodos);
+    toast.success("Todo Updated", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const selectHandler = (e) => {
